@@ -8,9 +8,9 @@ namespace WpfApp6
 {
     public class ToDo
     {
-        private string Name { get; set; }
-        public DateTime DateImpl { get; set; }
-        public string Description { get; set; }
+        private string Name;
+        private DateTime DateImpl;
+        private string Description;
 
         public ToDo(string name, DateTime dateImpl, string description)
         {

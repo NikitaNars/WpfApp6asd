@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock FontSize="26">Список дел</TextBlock>
+            <TextBlock FontSize="26" Name="MainText">Список дел</TextBlock>
         </StackPanel>
         <DataGrid HeadersVisibility="None" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="listToDo"  Background="#FDF5DF" Margin="5">
             <DataGrid.Columns>
@@ -46,4 +46,9 @@
             <Button Name="buttonAdd" Click="AddItem" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">Добвавить дело</Button>
         </StackPanel>
     </Grid>
+    <Window.Resources>
+        <Style x:Key="TextStyle">
+            <Setter Property="MainText.f"></Setter>
+        </Style>
+    </Window.Resources>
 </Window>

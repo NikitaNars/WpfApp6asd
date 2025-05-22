@@ -28,20 +28,21 @@ namespace WpfApp6
         {
             var mainWindow = (MainWindow)Owner;
             string title = titleToDo.Text;
-            DateTime date = (DateTime)dateToDo.SelectedDate;
+
             string description = descriptionToDo.Text;
             if (string.IsNullOrWhiteSpace(title))
             {
                 MessageBox.Show("Введите название дела");
                 return;
             }
-            if (!date.SelectedDate.HasValue) 
+
+            if (!dateToDo.SelectedDate.HasValue) 
             {
                 dateToDo.SelectedDate = DateTime.Now;
             }
 
 
-            mainWindow.TodoItems.Add(new ToDo(title, date, description));
+            mainWindow.TodoItems.Add(new ToDo(title, dateToDo.SelectedDate.Value, description));
 
             mainWindow.listToDo.Items.Refresh();
 
@@ -52,6 +53,11 @@ namespace WpfApp6
             mainWindow.listToDo.ItemsSource = null;
             mainWindow.listToDo.ItemsSource = mainWindow.TodoItems;
             this.Close();
+        }
+
+        private void descriptionToDo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
