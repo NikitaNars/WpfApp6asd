@@ -6,18 +6,24 @@
         xmlns:local="clr-namespace:WpfApp6"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="400" ResizeMode="NoResize">
+    <Window.Resources>
+        
+       
+    </Window.Resources>
     <Grid Background="#FFFDFAF1">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="0.2*"></RowDefinition>
         </Grid.RowDefinitions>
+
         
-        <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock FontSize="26" Name="MainText">Список дел</TextBlock>
+        <StackPanel Grid.Row="0" Grid.Column="0" >
+            <TextBlock Style="{StaticResource HeaderStyle}" Name="MainText">Список дел</TextBlock>
         </StackPanel>
-        <DataGrid HeadersVisibility="None" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="listToDo"  Background="#FDF5DF" Margin="5">
-            <DataGrid.Columns>
+        
+        <DataGrid GridLinesVisibility="Horizontal" HeadersVisibility="None" AutoGenerateColumns="False" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Name="listToDo"  Background="#FDF5DF" Margin="5">
+            <DataGrid.Columns >
                 
                 <DataGridCheckBoxColumn Width="0.1*"></DataGridCheckBoxColumn>
                 <DataGridTextColumn IsReadOnly="True" Width="0.7*" Binding="{Binding Path=GetName}"/>
@@ -25,7 +31,8 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="KillItem" Background="LightBlue">X</Button>
+                            <Button Click="KillItem" Width="15"  Height="20" Background="#5EBEC4">
+                                <Image Margin="1" Source="delete.png"></Image></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -42,13 +49,12 @@
 
         </DataGrid>
         
-        <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Name="buttonAdd" Click="AddItem" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">Добвавить дело</Button>
+        <StackPanel Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button Height="25" Width="30" Margin="5" Style="{StaticResource ButtonStyle}" Name="buttonAdd" Click="AddItem" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">
+                <Image Source="add.png"></Image>
+            </Button>
         </StackPanel>
     </Grid>
-    <Window.Resources>
-        <Style x:Key="TextStyle">
-            <Setter Property="MainText.f"></Setter>
-        </Style>
-    </Window.Resources>
+    
 </Window>
+
