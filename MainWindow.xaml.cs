@@ -30,7 +30,7 @@ namespace WpfApp6
             //    new ToDo("sda", new DateTime(2024, 1, 20), "asd")
             //};
             listToDo.ItemsSource = TodoItems;
-            TodoItems.CollectionChanged += (s, e) => Update();
+
 
             Update();
             

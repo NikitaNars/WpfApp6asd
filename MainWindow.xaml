@@ -46,9 +46,10 @@
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Path=GetDescription}"></TextBlock>
-                    </StackPanel>
+                    <ScrollViewer  MaxHeight="50">
+
+                        <TextBlock  Text="{Binding Path=GetDescription}"></TextBlock>
+                    </ScrollViewer>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
 
