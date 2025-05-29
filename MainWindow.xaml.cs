@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,16 +17,16 @@ namespace WpfApp6
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<ToDo> TodoItems;
+        public ObservableCollection<ToDo> TodoItems;
 
         public MainWindow()
         {
             InitializeComponent();
-            TodoItems = new List<ToDo>
+            TodoItems = new ObservableCollection<ToDo>
             {
-                new ToDo("Зdas", new DateTime(2024, 1, 15), "asd"),
-                new ToDo("asd", new DateTime(2024, 1, 12), "Мdas"),
-                new ToDo("sda", new DateTime(2024, 1, 20), "asd")
+                new ToDo("Зdas", new DateTime(2024, 1, 15), "asd", false),
+                new ToDo("asd", new DateTime(2024, 1, 12), "Мdas", false),
+                new ToDo("sda", new DateTime(2024, 1, 20), "asd", false)
             };
 
 
@@ -33,8 +34,7 @@ namespace WpfApp6
             listToDo.ItemsSource = TodoItems;
 
 
-            listToDo.ItemsSource = null;
-            listToDo.ItemsSource = TodoItems;
+            
         }
         private void AddItem(object sender, RoutedEventArgs e)
         {
@@ -55,8 +55,12 @@ namespace WpfApp6
 
             TodoItems.Remove(selectedToDo);
 
-            listToDo.ItemsSource = null;
-            listToDo.ItemsSource = TodoItems;
+            
+        }
+        private void Update()
+        {
+            TextProgressBar.Text = $"{TodoItems.Count}";
         }
     }
+    
 }

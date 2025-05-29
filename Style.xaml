@@ -31,4 +31,7 @@
         <Setter Property="Background" Value="White"></Setter>
 
     </Style>
+    <Style x:Key="StyleDataGrid" TargetType="DataGrid">
+        <Setter ></Setter>
+    </Style>
 </ResourceDictionary>
