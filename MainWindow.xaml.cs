@@ -17,21 +17,23 @@ namespace WpfApp6
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<ToDo> TodoItems;
+        public ObservableCollection<ToDo> TodoItems = new ObservableCollection<ToDo>();
 
         public MainWindow()
         {
             InitializeComponent();
-            TodoItems = new ObservableCollection<ToDo>
-            {
-                new ToDo("Зdas", new DateTime(2024, 1, 15), "asd", false),
-                new ToDo("asd", new DateTime(2024, 1, 12), "Мdas", false),
-                new ToDo("sda", new DateTime(2024, 1, 20), "asd", false)
-            };
-
-
-
+            
+            //TodoItems = new ObservableCollection<ToDo>
+            //{
+            //    new ToDo("Зdas", new DateTime(2024, 1, 15), "asd"),
+            //    new ToDo("asd", new DateTime(2024, 1, 12), "Мdas"),
+            //    new ToDo("sda", new DateTime(2024, 1, 20), "asd")
+            //};
             listToDo.ItemsSource = TodoItems;
+            TodoItems.CollectionChanged += (s, e) => Update();
+
+            Update();
+            
 
 
             
@@ -41,6 +43,7 @@ namespace WpfApp6
             Window1 window1 = new Window1();
             window1.Owner = this;
             window1.Show();
+            
 
         }
         
@@ -54,12 +57,36 @@ namespace WpfApp6
             }
 
             TodoItems.Remove(selectedToDo);
+            Update();
 
+
+        }
+        private void CheckItem(object sender, RoutedEventArgs e)
+        {
+            var todo = (sender as CheckBox)?.DataContext as ToDo;
+            if (listToDo.SelectedItem != null)
+            {
+                todo.GetDoing = true;
+                Update();
+            }
             
         }
-        private void Update()
+        private void UncheckItem(object sender, RoutedEventArgs e)
         {
-            TextProgressBar.Text = $"{TodoItems.Count}";
+            var todo = (sender as CheckBox)?.DataContext as ToDo;
+            if (listToDo.SelectedItem != null)
+            {
+                todo.GetDoing = false;
+                Update();
+            }
+            Update();
+        }
+
+        public void Update()
+        {
+            TextProgressBar.Text = $"{TodoItems.Count(t => t.GetDoing)}/ {TodoItems.Count}";
+            ProgressBar.Maximum = TodoItems.Count;
+            ProgressBar.Value = TodoItems.Count(t => t.GetDoing);
         }
     }
     

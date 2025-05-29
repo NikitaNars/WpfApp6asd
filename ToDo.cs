@@ -23,7 +23,7 @@ namespace WpfApp6
         public string GetName { get { return Name; } }
         public DateTime GetDateImpl { get { return DateImpl; } }
         public string GetDescription { get { return Description; } }
-        public bool GetDoing {  get { return Doing; } }
+        public bool GetDoing {  get { return Doing; } set { Doing = value; } }
 
     }
 }

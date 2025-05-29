@@ -53,6 +53,7 @@ namespace WpfApp6
             mainWindow.listToDo.ItemsSource = null;
             mainWindow.listToDo.ItemsSource = mainWindow.TodoItems;
             this.Close();
+            mainWindow.Update();
         }
 
         private void descriptionToDo_TextChanged(object sender, TextChangedEventArgs e)

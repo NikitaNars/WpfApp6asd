@@ -18,14 +18,20 @@
         </Grid.RowDefinitions>
 
         
-        <StackPanel Grid.Row="0" Grid.Column="0" >
+        <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
             <TextBlock Style="{StaticResource HeaderStyle}" Name="MainText">Список дел</TextBlock>
         </StackPanel>
         
         <DataGrid GridLinesVisibility="Horizontal" HeadersVisibility="None" AutoGenerateColumns="False" Grid.Row="1"  Grid.Column="0" Name="listToDo"  Background="#FDF5DF" Margin="5">
             <DataGrid.Columns >
-                
-                <DataGridCheckBoxColumn Width="0.1*"></DataGridCheckBoxColumn>
+
+                <DataGridTemplateColumn Width="0.1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox Checked="CheckItem" Unchecked="UncheckItem"></CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn IsReadOnly="True" Width="0.7*" Binding="{Binding Path=GetName}"/>
                 <DataGridTextColumn IsReadOnly="True" Width="0.5*" Binding="{Binding Path=GetDateImpl, StringFormat='Дата: {0:dd.MM.yyyy}'}"/>
                 <DataGridTemplateColumn>
@@ -56,7 +62,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2">
-            <ProgressBar Name="ProgressBar" Margin="5" Height="25" Maximum="100" Minimum="0" ></ProgressBar>
+            <ProgressBar Name="ProgressBar" Margin="5" Height="25" Maximum="100" Minimum="0" Foreground="#5EBEC4" Background="#FDF5DF"></ProgressBar>
         </StackPanel>
         <TextBlock Name="TextProgressBar" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
     </Grid>
