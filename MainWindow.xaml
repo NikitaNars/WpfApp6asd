@@ -6,10 +6,7 @@
         xmlns:local="clr-namespace:WpfApp6"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="400" ResizeMode="NoResize">
-    <Window.Resources>
-        
-       
-    </Window.Resources>
+   
     <Grid Background="#FFFDFAF1">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"></RowDefinition>
@@ -21,40 +18,38 @@
         <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
             <TextBlock Style="{StaticResource HeaderStyle}" Name="MainText">Список дел</TextBlock>
         </StackPanel>
-        
-        <DataGrid GridLinesVisibility="Horizontal" HeadersVisibility="None" AutoGenerateColumns="False" Grid.Row="1"  Grid.Column="0" Name="listToDo"  Background="#FDF5DF" Margin="5">
-            <DataGrid.Columns >
 
-                <DataGridTemplateColumn Width="0.1*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox Checked="CheckItem" Unchecked="UncheckItem"></CheckBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn IsReadOnly="True" Width="0.7*" Binding="{Binding Path=GetName}"/>
-                <DataGridTextColumn IsReadOnly="True" Width="0.5*" Binding="{Binding Path=GetDateImpl, StringFormat='Дата: {0:dd.MM.yyyy}'}"/>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="KillItem" Width="15"  Height="20" Background="#5EBEC4">
-                                <Image Margin="1" Source="delete.png"></Image></Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-            </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
+        <ListBox Grid.Row="1" Name="listToDo"  Background="#FFFFFAD6" Margin="10,5,10,5">
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <ScrollViewer  MaxHeight="50">
+                    <Grid HorizontalAlignment="Stretch" ShowGridLines="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0.33*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <CheckBox Checked="CheckItem" Unchecked="UncheckItem"></CheckBox>
+                            <TextBlock Text="{Binding Path=GetName}" Margin="5 0 0 0 " HorizontalAlignment="Stretch"> </TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=GetDateImpl, StringFormat='Дата: {0:dd.MM.yyyy}'}"></TextBlock>
+                            <Button Click="KillItem">
+                                <Image  Source="delete.png"></Image>
+                            </Button>
+                        </StackPanel>
+                        <ScrollViewer MaxHeight="60" Grid.Row="1">
+                            <TextBlock  Text="{Binding Path=GetDescription}" FontSize="10"></TextBlock>
+                        </ScrollViewer>
 
-                        <TextBlock  Text="{Binding Path=GetDescription}"></TextBlock>
-                    </ScrollViewer>
+                    </Grid>
                 </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
+            </ListBox.ItemTemplate>
 
-
-        </DataGrid>
+        </ListBox>
         
         <StackPanel Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Right">
             <Button Height="25" Width="30" Margin="5" Style="{StaticResource ButtonStyle}" Name="buttonAdd" Click="AddItem" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">
