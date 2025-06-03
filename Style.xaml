@@ -31,5 +31,12 @@
         <Setter Property="Background" Value="White"></Setter>
 
     </Style>
+    <Style  x:Key="GridStyle" TargetType="Grid">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     
 </ResourceDictionary>

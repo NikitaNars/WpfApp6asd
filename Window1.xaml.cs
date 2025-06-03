@@ -28,7 +28,7 @@ namespace WpfApp6
         {
             var mainWindow = (MainWindow)Owner;
             string title = titleToDo.Text;
-
+            
             string description = descriptionToDo.Text;
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -42,7 +42,7 @@ namespace WpfApp6
             }
 
 
-            mainWindow.TodoItems.Add(new ToDo(title, dateToDo.SelectedDate.Value, description));
+            mainWindow.TodoItems.Add(new ToDo(title, dateToDo.SelectedDate.Value, (description == ""? "Нет описания": description)));
 
             mainWindow.listToDo.Items.Refresh();
 

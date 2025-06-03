@@ -22,7 +22,7 @@
         <ListBox HorizontalContentAlignment="Stretch" Grid.Row="1" Name="listToDo"  Background="#FFFFFAD6" Margin="10,5,10,5">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch" Style="{StaticResource GridStyle}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="0.5*"/>
