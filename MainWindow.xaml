@@ -19,25 +19,25 @@
             <TextBlock Style="{StaticResource HeaderStyle}" Name="MainText">Список дел</TextBlock>
         </StackPanel>
 
-        <ListBox Grid.Row="1" Name="listToDo"  Background="#FFFFFAD6" Margin="10,5,10,5">
+        <ListBox HorizontalContentAlignment="Stretch" Grid.Row="1" Name="listToDo"  Background="#FFFFFAD6" Margin="10,5,10,5">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch" ShowGridLines="True">
+                    <Grid HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.33*"/>
+                            <ColumnDefinition Width="0.5*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="0.5*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                             <CheckBox Checked="CheckItem" Unchecked="UncheckItem"></CheckBox>
                             <TextBlock Text="{Binding Path=GetName}" Margin="5 0 0 0 " HorizontalAlignment="Stretch"> </TextBlock>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <TextBlock Text="{Binding Path=GetDateImpl, StringFormat='Дата: {0:dd.MM.yyyy}'}"></TextBlock>
-                            <Button Click="KillItem">
+                            <Button Click="KillItem" Height="20" Width="20">
                                 <Image  Source="delete.png"></Image>
                             </Button>
                         </StackPanel>
