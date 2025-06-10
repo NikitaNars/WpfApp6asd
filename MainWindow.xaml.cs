@@ -49,6 +49,7 @@ namespace WpfApp6
         
         private void KillItem(object sender, RoutedEventArgs e)
         {
+           
             ToDo selectedToDo = listToDo.SelectedItem as ToDo;
             if (selectedToDo == null)
             {
@@ -56,29 +57,22 @@ namespace WpfApp6
                 return;
             }
 
-            TodoItems.Remove(selectedToDo);
+            TodoItems.Remove(listToDo.SelectedItem as ToDo);
             Update();
-
+            
 
         }
         private void CheckItem(object sender, RoutedEventArgs e)
         {
             var todo = (sender as CheckBox)?.DataContext as ToDo;
-            if (listToDo.SelectedItem != null)
-            {
-                todo.GetDoing = true;
-                Update();
-            }
-            
+            todo.GetDoing = true;
+            Update();
         }
         private void UncheckItem(object sender, RoutedEventArgs e)
         {
             var todo = (sender as CheckBox)?.DataContext as ToDo;
-            if (listToDo.SelectedItem != null)
-            {
-                todo.GetDoing = false;
-                Update();
-            }
+            
+            todo.GetDoing = false;
             Update();
         }
 

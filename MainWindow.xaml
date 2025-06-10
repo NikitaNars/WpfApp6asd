@@ -6,14 +6,20 @@
         xmlns:local="clr-namespace:WpfApp6"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="400" ResizeMode="NoResize">
-   
+    <Window.Resources>
+        <local:DateTimeConvectorYellow x:Key="DateTimeConvectorYellow"/>
+        <local:DateTimeConvector x:Key="DateTimeConvector"/>
+        
+    </Window.Resources>
     <Grid Background="#FFFDFAF1">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="0.1*"></RowDefinition>
         </Grid.RowDefinitions>
 
+        
         
         <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
             <TextBlock Style="{StaticResource HeaderStyle}" Name="MainText">Список дел</TextBlock>
@@ -32,16 +38,51 @@
                             <RowDefinition Height="0.5*"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                            <CheckBox Checked="CheckItem" Unchecked="UncheckItem"></CheckBox>
-                            <TextBlock Text="{Binding Path=GetName}" Margin="5 0 0 0 " HorizontalAlignment="Stretch"> </TextBlock>
+                            <CheckBox  Name="checkbox1" Checked="CheckItem" Unchecked="UncheckItem" DataContext="{Binding}"></CheckBox>
+                            <StackPanel>
+                                <TextBlock  Text="{Binding Path=GetName}" Margin="5 0 0 0 " HorizontalAlignment="Stretch">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=checkbox1, Path=IsChecked}" Value="True">
+                                                    <Setter Property="TextDecorations" Value="Strikethrough"></Setter>
+
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                
+                            </StackPanel>
+                            
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=GetDateImpl, StringFormat='Дата: {0:dd.MM.yyyy}'}"></TextBlock>
-                            <Button Click="KillItem" Height="20" Width="20">
-                                <Image  Source="delete.png"></Image>
+                            
+                            <StackPanel>
+                                <TextBlock  Name="Date" Text="{Binding Path=GetDateImpl, StringFormat='{}{0:dd.MM.yyyy}'}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="Green"></Setter>
+                                            <Style.Triggers>
+                                                
+                                                <DataTrigger Binding="{Binding Path=GetDateImpl, Converter={StaticResource DateTimeConvector}}" Value="True">
+                                                    <Setter Property="Foreground" Value="Red"></Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=GetDateImpl, Converter={StaticResource DateTimeConvectorYellow}}" Value="True">
+                                                    <Setter Property="Foreground" Value="Orange"></Setter>
+                                                </DataTrigger>
+
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+
+                            </StackPanel>
+                            <Button Margin="5 0 0 0" Click="KillItem" Height="20" Width="20">
+                                <Image Margin="2"  Source="delete.png"></Image>
                             </Button>
                         </StackPanel>
-                        <ScrollViewer MaxHeight="60" Grid.Row="1">
+                        <ScrollViewer MaxHeight="60" Grid.Row="1" Grid.ColumnSpan="2">
                             <TextBlock  Text="{Binding Path=GetDescription}" FontSize="10"></TextBlock>
                         </ScrollViewer>
 
@@ -53,7 +94,7 @@
         
         <StackPanel Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Right">
             <Button Height="25" Width="30" Margin="5" Style="{StaticResource ButtonStyle}" Name="buttonAdd" Click="AddItem" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">
-                <Image Source="add.png"></Image>
+                <Image  Source="add.png"></Image>
             </Button>
         </StackPanel>
 

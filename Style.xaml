@@ -38,5 +38,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <Style x:Key="ButtonDel" TargetType="Button">
+        <Setter Property="Background" Value="#5EBEC4"></Setter>
+    </Style>
     
 </ResourceDictionary>
