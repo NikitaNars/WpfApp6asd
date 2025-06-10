@@ -20,6 +20,7 @@ namespace WpfApp6
     /// </summary>
     public partial class Window1 : Window
     {
+        public static RoutedCommand EnterTasck { get; } = new RoutedCommand();
         public Window1()
         {
             InitializeComponent();
@@ -56,9 +57,6 @@ namespace WpfApp6
             mainWindow.Update();
         }
 
-        private void descriptionToDo_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+        
     }
 }

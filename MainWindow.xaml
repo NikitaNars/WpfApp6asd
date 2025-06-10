@@ -11,6 +11,33 @@
         <local:DateTimeConvector x:Key="DateTimeConvector"/>
         
     </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding 
+            Command="{x:Static local:MainWindow.AddNewTaskCommand}" 
+            Executed="AddItem"  />
+        <CommandBinding
+            Command="{x:Static local:MainWindow.DeleteTasck}"
+            Executed="KillItem"/>
+        <CommandBinding
+            Command="{x:Static local:MainWindow.SaveTascks}"
+            Executed="SaveItem"/>
+    </Window.CommandBindings>
+    
+    <Window.InputBindings>
+        <KeyBinding 
+        Key="N" 
+        Modifiers="Control" 
+        Command="{x:Static local:MainWindow.AddNewTaskCommand}" />
+        <KeyBinding
+            Key="Delete"
+            Command="{x:Static local:MainWindow.DeleteTasck}"/>
+        <KeyBinding
+            Key="S"
+            Modifiers="Ctrl"
+            Command="{x:Static local:MainWindow.SaveTascks}"/>
+        
+    </Window.InputBindings>
     <Grid Background="#FFFDFAF1">
         
         <Grid.RowDefinitions>
@@ -92,9 +119,13 @@
 
         </ListBox>
         
-        <StackPanel Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Right">
-            <Button Height="25" Width="30" Margin="5" Style="{StaticResource ButtonStyle}" Name="buttonAdd" Click="AddItem" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">
-                <Image  Source="add.png"></Image>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button Height="25" Width="30" Margin="5" Style="{StaticResource ButtonStyle}" Name="buttonSave" Click="SaveItem" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">
+                <Image  Source="/save.png"></Image>
+            </Button>
+            <Button Command="{x:Static local:MainWindow.AddNewTaskCommand}"  Height="25" Width="30" Margin="5" Style="{StaticResource ButtonStyle}" Name="buttonAdd" Background="#5EBEC4" ToolTip="При добавлении дело появится в списке слева, и его придется выполнить">
+                <Image  Source="/add.png"></Image>
+                
             </Button>
         </StackPanel>
 
